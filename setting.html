@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<title>รายงานขาย</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" href="css/main.css">
+<link rel="stylesheet" href="css/w3-theme-blue-grey.css">
+<link rel="stylesheet" href="css/table.css">
+<link rel="stylesheet" href="css/theme.css">
+<link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet" href="css/alertify.core.css">
+<link rel="stylesheet" href="css/alertify.default.css">
+
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+
+<body class="w3-theme-l5" onload="show_setting();">
+<!-- Navbar -->
+<div class="w3-top">
+ <ul class="w3-navbar w3-left-align w3-large theme-edit">
+  <li class="w3-hide-medium w3-hide-large w3-opennav w3-right">
+    <a class="w3-padding-large w3-hover-white w3-large theme-edit" href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
+  </li>
+  <li class="logo_header"><img src="images/L-white.png" class="logo"><p class="logop">Northern Part Steel CO.,LTD.</p></li>
+  <li class="w3-hide-small w3-dropdown-hover">
+    <a href="#" class="w3-padding-large w3-hover-white" title="ระบบทำใบเสนอราคา">
+        <i class="fa fa-book"></i>
+        <span class="w3-badge w3-right w3-small w3-green">ระบบทำใบเสนอราคา</span>
+    </a>
+    <div class="w3-dropdown-content w3-white w3-card-4">
+      <a href="quotation.html">ใบเสนอราคาทั้งหมด</a>
+      <a href="quotation_form.html">ทำใบเสนอราคา</a>
+    </div>
+  </li>
+  <li class="w3-hide-small w3-dropdown-hover">
+    <a href="#" class="w3-padding-large w3-hover-white" title="Report">
+        <i class="fa fa-book"></i>
+        <span class="w3-badge w3-right w3-small w3-green">Report</span>
+    </a>
+    <div class="w3-dropdown-content w3-white w3-card-4">
+      <a href="report1.html">รายงานขาย</a>
+      <a href="report2.html">รายงานยอดขาย</a>
+      <a href="report3.html">รายงานสต๊อกสินค้า</a>
+    </div>
+  </li>
+  <li class="w3-hide-small w3-dropdown-hover">
+    <a href="#" class="w3-padding-large w3-hover-white" title="setting">
+        <i class="fa fa-cog"></i>
+        <span class="w3-badge w3-right w3-small w3-green">setting</span>
+    </a>
+    <div class="w3-dropdown-content w3-white w3-card-4">
+      <a href="setting.html">ตั้งค่า config</a>
+      <a href="javascript:logout();">ออกจากระบบ</a>
+    </div>
+  </li>
+  </ul>
+</div>
+
+
+<!-- Navbar on small screens -->
+<div id="navDemo" class="w3-hide w3-hide-large w3-hide-medium w3-top" style="margin-top:51px">
+  <ul class="w3-navbar w3-left-align w3-large theme-edit">
+    <li><a class="w3-padding-large w3-teal" href="#">ระบบทำใบเสนอราคา</a>
+        <li><a href="quotation.html">ใบเสนอราคาทั้งหมด</a></li>
+        <li><a href="quotation_form.html">ทำใบเสนอราคา</a></li>
+    </li>
+    <li><a class="w3-padding-large w3-teal" href="#">report</a>
+        <li><a class="w3-padding-responsible" href="report1.html"> รายงานขาย</a></li>
+        <li><a class="w3-padding-responsible" href="report2.html"> รายงานยอดขาย</a></li>
+        <li><a class="w3-padding-responsible" href="report3.html"> รายงานสต๊อกสินค้า</a></li>
+    </li>
+     <li>
+        <a class="w3-padding-large w3-teal" href="#">setting</a>
+        <li><a class="w3-padding-responsible" href="setting.html"> ตั้งค่า config</a></li>
+        <li><a class="w3-padding-responsible" href="javascript:logout();"> ออกจากระบบ</a></li>
+  </li>
+  </ul>
+</div>
+
+
+<!-- Page Container -->
+<div class="w3-container w3-content" style="max-width:1900px;margin-top:60px">
+  <div class="w3-row">
+    <div class="w3-col m12">
+      <div class="w3-card-2 w3-round w3-white">
+        <div class="head_text">
+        <br>
+
+          <h2>การตั้งค่าต่างๆ</h2>
+        <div class="set">
+        <div class="setting1">link api :</div>
+        <div class="setting2">
+                <input type="text" name="link_api" id="link_api" class="form-control" placeholder="link api">
+        </div>
+        </div>
+        <div class="clear"></div>
+        <div class="set">
+        <div class="setting1">ราคาสต๊อกเหล็กรูป :</div>
+        <div class="setting2">
+                <input type="number" name="steel_per1" id="steel_per1" class="form-control per" placeholder="%">
+        </div>
+        <div class="per">&nbsp;  % </div>
+        </div>
+        <div class="clear"></div>
+        <div class="set">
+        <div class="setting1">ราคาสต๊อกตระแกรง :</div>
+        <div class="setting2">
+                <input type="number"  name="steel_per2" id="steel_per2" class="form-control per" placeholder="%">
+        </div>
+        <div class="per">&nbsp; % </div>
+        </div>
+        <div class="clear"></div>
+        <input type="button" class="btn btn-info btn_setting" onclick="save_setting();" value="บันทึก"></li>
+        <br>
+          <hr>
+        </div>
+
+
+            <div class="table-responsive" id="show_detail"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="scrollToTop"><a href="#" class="scrollToTop"></a></div>
+
+
+
+
+
+<script type="text/javascript" src="js/jquery-1.11.3.js"></script>
+<script type="text/javascript" src="js/setting.js"></script>
+<script type="text/javascript" src="js/templete.js"></script>
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<script type="text/javascript" src="js/alertify.js"></script>
+<script type="text/javascript">
+  function logout(){
+    // confirm dialog
+    alertify.confirm("ท่านต้องการออกจากระบบ ใช่หรือไม่ ?", function (e) {
+        if (e) {
+            window.location="index.php";
+        } else {
+            // user clicked "cancel"
+        }
+    });
+}
+</script>
+</body>
+</html>
+

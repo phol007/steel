@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+<title>รายงานสต๊อกสินค้า</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="format-detection" content="telephone=no" />
+<meta name="msapplication-tap-highlight" content="no" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" href="css/main.css">
+<link rel="stylesheet" href="css/w3-theme-blue-grey.css">
+<link rel="stylesheet" href="css/table.css">
+<link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet" href="css/theme.css">
+
+<link rel="stylesheet" href="css/alertify.core.css">
+<link rel="stylesheet" href="css/alertify.default.css">
+
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+
+<body class="w3-theme-l5">
+<!-- Navbar -->
+<div class="w3-top">
+ <ul class="w3-navbar w3-left-align w3-large theme-edit">
+  <li class="w3-hide-medium w3-hide-large w3-opennav w3-right">
+    <a class="w3-padding-large w3-hover-white w3-large theme-edit" href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
+  </li>
+  <li class="logo_header"><img src="images/L-white.png" class="logo"><p class="logop">Northern Part Steel CO.,LTD.</p></li>
+  <li class="w3-hide-small w3-dropdown-hover">
+    <a href="#" class="w3-padding-large w3-hover-white" title="ระบบทำใบเสนอราคา">
+        <i class="fa fa-book"></i>
+        <span class="w3-badge w3-right w3-small w3-green">ระบบทำใบเสนอราคา</span>
+    </a>
+    <div class="w3-dropdown-content w3-white w3-card-4">
+      <a href="quotation.html">ใบเสนอราคาทั้งหมด</a>
+      <a href="quotation_form.html">ทำใบเสนอราคา</a>
+    </div>
+  </li>
+  <li class="w3-hide-small w3-dropdown-hover">
+    <a href="#" class="w3-padding-large w3-hover-white" title="Report">
+        <i class="fa fa-book"></i>
+        <span class="w3-badge w3-right w3-small w3-green">Report</span>
+    </a>
+    <div class="w3-dropdown-content w3-white w3-card-4">
+      <a href="report1.html">รายงานขาย</a>
+      <a href="report2.html">รายงานยอดขาย</a>
+      <a href="report3.html">รายงานสต๊อกสินค้า</a>
+    </div>
+  </li>
+  <li class="w3-hide-small w3-dropdown-hover">
+    <a href="#" class="w3-padding-large w3-hover-white" title="Report">
+        <i class="fa fa-cog"></i>
+        <span class="w3-badge w3-right w3-small w3-green">setting</span>
+    </a>
+    <div class="w3-dropdown-content w3-white w3-card-4">
+      <a href="setting.html">ตั้งค่า config</a>
+      <a href="javascript:logout();">ออกจากระบบ</a>
+    </div>
+  </li>
+  </ul>
+</div>
+
+
+<!-- Navbar on small screens -->
+<div id="navDemo" class="w3-hide w3-hide-large w3-hide-medium w3-top" style="margin-top:51px">
+  <ul class="w3-navbar w3-left-align w3-large theme-edit">
+    <li><a class="w3-padding-large w3-teal" href="#">ระบบทำใบเสนอราคา</a>
+        <li><a href="quotation.html">ใบเสนอราคาทั้งหมด</a></li>
+        <li><a href="quotation_form.html">ทำใบเสนอราคา</a></li>
+    </li>
+    <li><a class="w3-padding-large w3-teal" href="#">report</a>
+        <li><a class="w3-padding-responsible" href="report1.html"> รายงานขาย</a></li>
+        <li><a class="w3-padding-responsible" href="report2.html"> รายงานยอดขาย</a></li>
+        <li><a class="w3-padding-responsible" href="report3.html"> รายงานสต๊อกสินค้า</a></li>
+    </li>
+     <li>
+        <a class="w3-padding-large w3-teal" href="#">setting</a>
+        <li><a class="w3-padding-responsible" href="setting.html"> ตั้งค่า config</a></li>
+        <li><a class="w3-padding-responsible" href="javascript:logout();"> ออกจากระบบ</a></li>
+  </li>
+  </ul>
+</div>
+
+
+<!-- Page Container -->
+<div class="w3-container w3-content" style="max-width:1900px;margin-top:60px">
+  <div class="w3-row">
+    <div class="w3-col m12">
+      <div class="w3-card-2 w3-round w3-white">
+        <div class="head_text">
+          <h2> รายงานสต๊อกสินค้า</h2>
+
+          <select class="form-control select_type" onchange="return selecttype_stock(this);" id="select_typeitem">
+          <option value="0">ดูตามคำค้นหา</option>
+          <option value="1">ดูตามช่วงสินค้า</option>
+          </select>
+          
+          <div id="code">
+            <div class="search1">สินค้า :<input type="text" class="form-control" id="select_code" onchange="selecttype_stock();"></div>
+            <div class="search2">
+              <a href="#" class="btn btn-info btn-sm" data-toggle="modal" data-target="#searchitem1">
+                <span class="fa fa-search"></span>
+              </a></div><br><br>
+          </div>
+          <div id="show_srarchitem"></div>
+          
+         
+          <div id="begin_code" style="display:none;">
+            <div class="search1">จากสินค้า :<input type="text" class="form-control" id="select_begincode"></div>
+            <div class="search2">
+              <a href="#" class="btn btn-info btn-sm" data-toggle="modal" data-target="#searchitem2">
+                <span class="fa fa-search"></span>
+              </a></div>
+          </div>
+          
+          
+          <div  id="end_code" style="display:none;"">
+            <div class="search1">ถึงสินค้า :<input type="text" class="form-control" id="select_endcode"></div>
+            <div class="search2">
+              <a href="#" class="btn btn-info btn-sm" data-toggle="modal" data-target="#searchitem3">
+                <span class="fa fa-search"></span>
+              </a></div><br><br><br><br>
+          </div>
+          
+          <br><br><button class="btn btn-success" onclick="selecttype_stock();">ดูรายงาน</button><br>
+
+          <hr>
+        </div>
+            <div class="table-responsive">
+              <div id="show_stockdetail" class="res"></div>
+              
+            </div>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+<!--============================================================================================== modal ==============================================-->
+<!-- Modal -->
+  <div class="modal fade" id="searchitem1" role="dialog" style="padding-left:0; padding-right:0;">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">ค้นหาสินค้า</h4>
+        </div>
+        <div class="modal-body" style="margin:0;padding:0;">
+          <div class="form-group">
+            <label class="control-label col-xs-3" style="text-align:right; padding:0;" for="SaleName">ค้นหา :</label>
+            <div class="col-xs-8">
+              <input type="text" class="form-control" onkeyup="search_item();" id="item_search" placeholder="Search...">
+            </div>
+          </div>
+          <div style="text-align:center;" >
+              <label id="custolist"><br>** รายการสินค้า **</label>
+              <div class="table-responsive">
+              <div id="show_srarchitem1"></div>
+              
+            </div>
+          </div>
+        </div>
+
+      </div>
+      
+    </div>
+  </div>
+<!-- Modal -->
+<!-- Modal -->
+  <div class="modal fade" id="searchitem2" role="dialog" style="padding-left:0; padding-right:0;">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">ค้นหาสินค้า</h4>
+        </div>
+        <div class="modal-body" style="margin:0;padding:0;">
+          <div class="form-group">
+            <label class="control-label col-xs-3" style="text-align:right; padding:0;" for="SaleName">ค้นหา :</label>
+            <div class="col-xs-8">
+              <input type="text" class="form-control" onkeyup="search_item2();" id="item_search2" placeholder="Search...">
+            </div>
+          </div>
+          <div style="text-align:center;" >
+              <label id="custolist"><br>** รายการสินค้า **</label>
+              <div class="table-responsive">
+              <div id="show_srarchitem2"></div>
+              
+            </div>
+          </div>
+        </div>
+
+      </div>
+      
+    </div>
+  </div>
+<!-- Modal -->
+<!-- Modal -->
+  <div class="modal fade" id="searchitem3" role="dialog" style="padding-left:0; padding-right:0;">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">ค้นหาสินค้า</h4>
+        </div>
+        <div class="modal-body" style="margin:0;padding:0;">
+          <div class="form-group">
+            <label class="control-label col-xs-3" style="text-align:right; padding:0;" for="SaleName">ค้นหา :</label>
+            <div class="col-xs-8">
+              <input type="text" class="form-control" onkeyup="search_item3();" id="item_search3" placeholder="Search...">
+            </div>
+          </div>
+          <div style="text-align:center;" >
+              <label id="custolist"><br>** รายการสินค้า **</label>
+              <div class="table-responsive">
+              <div id="show_srarchitem3"></div>
+              
+            </div>
+          </div>
+        </div>
+
+      </div>
+      
+    </div>
+  </div>
+<!-- Modal -->
+<div class="scrollToTop"><a href="#" class="scrollToTop"></a></div>
+<script type="text/javascript" src="js/jquery-1.11.3.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+  $(window).scroll(function(){
+    if ($(this).scrollTop() > 100) {
+      $('.scrollToTop').fadeIn();
+    } else {
+      $('.scrollToTop').fadeOut();
+    }
+  });
+  $('.scrollToTop').click(function(){
+    $('html, body').animate({scrollTop : 0},800);
+    return false;
+  });
+  
+});
+</script>  
+
+
+<script type="text/javascript" src="js/templete.js"></script>
+<script type="text/javascript" src="js/function_report3.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<script type="text/javascript" src="js/alertify.js"></script>
+
+</body>
+</html>
+

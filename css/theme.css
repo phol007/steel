@@ -1,0 +1,33 @@
+.theme-edit{
+	
+	background-color: #0d3692;
+	color:#FFF;
+}
+.font_color{
+color:#FFF;
+
+}
+.logo{
+	width: 25%;
+	margin: 2% 0 0 2%;
+}
+.logop{
+	margin-left: 2%;
+	font-size: 12px;
+}
+.logo_header{
+	width: 200px;
+}
+@media screen and (max-width: 699px) and (min-width: 220px) {
+.logo{
+	width: 40px;
+	margin: 1% 0 0 2%;
+}
+.logop{
+	margin-left: 2%;
+	font-size: 10px;
+}
+.logo_header{
+	width: 10%;
+}	
+}

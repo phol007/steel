@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Page Title</title>
+<meta charset="utf-8">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script> 
+</head>
+<body>
+
+<script type="text/javascript">
+// JavaScript Document
+function createAjax() 
+{
+    var request = false;
+        try {
+            request = new ActiveXObject('Msxml2.XMLHTTP');
+        }
+        catch (err2) {
+            try {
+                request = new ActiveXObject('Microsoft.XMLHTTP');
+            }
+            catch (err3) {
+    try {
+      request = new XMLHttpRequest();
+    }
+    catch (err1) 
+    {
+      request = false;
+    }
+            }
+        }
+    return request;
+}
+
+function doajax(mydata){
+ var ajax1=createAjax(); 
+ ajax1.onreadystatechange=function(){
+  if(ajax1.readyState==4 && ajax1.status==200){
+   document.getElementById('myplace').innerHTML=ajax1.responseText;
+  }else{
+   return false;
+  }
+ }
+ ajax1.open("POST","index.php",true);
+ ajax1.setRequestHeader("Content-Type", "application/x-www-form-urlencoded"); 
+ ajax1.send("name="+document.form1.name.value+"&email="+document.form1.email.value);
+ //window.location="index.php";
+}
+</script>
+<form action="" method="post" enctype="multipart/form-data" name="form1" id="form1">
+  ชื่อ
+  <input name="name" type="text" id="name" />
+  อีเมลล์
+  <input name="email" type="text" id="email" />
+  <input type="button" name="Button" value="Send" onclick="doajax()" />
+</form>
+
+<p id="myplace"></p>
+
+</body>
+</html>

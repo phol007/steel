@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+<title>รายงานขาย</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="css/main.css">
+<link rel="stylesheet" href="css/w3-theme-blue-grey.css">
+<link rel="stylesheet" href="css/table.css">
+<link rel="stylesheet" href="css/theme.css">
+<link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet" href="css/alertify.core.css">
+<link rel="stylesheet" href="css/alertify.default.css">
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+
+<body class="w3-theme-l5" onload="defult_value();">
+    <!-- Navbar -->
+    <div class="w3-top">
+        <ul class="w3-navbar w3-left-align w3-large theme-edit">
+            <li class="w3-hide-medium w3-hide-large w3-opennav w3-right">
+                <a class="w3-padding-large w3-hover-white w3-large theme-edit" href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
+            </li>
+            <li class="logo_header"><img src="images/L-white.png" class="logo">
+                <p class="logop">Northern Part Steel CO.,LTD.</p>
+            </li>
+            <li class="w3-hide-small w3-dropdown-hover">
+                <a href="#" class="w3-padding-large w3-hover-white" title="ระบบทำใบเสนอราคา">
+                    <i class="fa fa-book"></i>
+                    <span class="w3-badge w3-right w3-small w3-green">ระบบทำใบเสนอราคา</span>
+                </a>
+                <div class="w3-dropdown-content w3-white w3-card-4">
+                    <a href="quotation.html">ใบเสนอราคาทั้งหมด</a>
+                    <a href="quotation_form.html">ทำใบเสนอราคา</a>
+                </div>
+            </li>
+            <li class="w3-hide-small w3-dropdown-hover">
+                <a href="#" class="w3-padding-large w3-hover-white" title="Report">
+                    <i class="fa fa-book"></i>
+                    <span class="w3-badge w3-right w3-small w3-green">Report</span>
+                </a>
+                <div class="w3-dropdown-content w3-white w3-card-4">
+                    <a href="report1.html">รายงานขาย</a>
+                    <a href="report2.html">รายงานยอดขาย</a>
+                    <a href="report3.html">รายงานสต๊อกสินค้า</a>
+                </div>
+            </li>
+            <li class="w3-hide-small w3-dropdown-hover">
+                <a href="#" class="w3-padding-large w3-hover-white" title="Report">
+                    <i class="fa fa-cog"></i>
+                    <span class="w3-badge w3-right w3-small w3-green">setting</span>
+                </a>
+                <div class="w3-dropdown-content w3-white w3-card-4">
+                    <a href="setting.html">ตั้งค่า config</a>
+                    <a href="javascript:logout();">ออกจากระบบ</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <!-- Navbar on small screens -->
+    <div id="navDemo" class="w3-hide w3-hide-large w3-hide-medium w3-top" style="margin-top:51px">
+        <ul class="w3-navbar w3-left-align w3-large theme-edit">
+            <li><a class="w3-padding-large w3-teal" href="#">ระบบทำใบเสนอราคา</a>
+                <li><a href="quotation.html">ใบเสนอราคาทั้งหมด</a></li>
+                <li><a href="quotation_form.html">ทำใบเสนอราคา</a></li>
+            </li>
+            <li><a class="w3-padding-large w3-teal" href="#">report</a>
+                <li><a class="w3-padding-responsible" href="report1.html"> รายงานขาย</a></li>
+                <li><a class="w3-padding-responsible" href="report2.html"> รายงานยอดขาย</a></li>
+                <li><a class="w3-padding-responsible" href="report3.html"> รายงานสต๊อกสินค้า</a></li>
+            </li>
+            <li>
+                <a class="w3-padding-large w3-teal" href="#">setting</a>
+                <li><a class="w3-padding-responsible" href="setting.html"> ตั้งค่า config</a></li>
+                <li><a class="w3-padding-responsible" href="javascript:logout();"> ออกจากระบบ</a></li>
+            </li>
+        </ul>
+    </div>
+    <!-- Page Container -->
+    <div class="w3-container w3-content" style="max-width:1900px;margin-top:60px">
+        <div class="w3-row">
+            <div class="w3-col m12">
+                <div class="w3-card-2 w3-round w3-white">
+                    <div class="head_text">
+                        <br>
+                        <select class="form-control select_type" onchange="return selecttype_sale(this);" id="select_type">
+                            <option value="0">รายงานประจำวัน</option>
+                            <option value="1">ช่วงวันที่</option>
+                        </select>
+                        <input type="date" class="form-control select_date" id="select_date">
+                        <input type="date" class="form-control select_date" id="select_begindate" style="display:none;">
+                        <input type="date" class="form-control select_date" id="select_enddate" style="display:none;">
+                        <br>
+                        <div id="show_pdf"></div>
+                        <div>
+                            <div class="salecode">
+                                <div class="sstext">
+                                    ค้นหาตามพนักงาน :
+                                    <input type="type" class="form-control" id="salecode" placeholder="รหัสพนักงาน">
+                                </div>
+                                <div class="sssearch">
+                                    <a href="#" class="btn btn-info btn-sm" data-toggle="modal" data-target="#searchsale">
+                                        <span class="fa fa-search"></span>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="arcode">
+                                <div class="sstext">
+                                    ค้นหาตามลูกค้า :
+                                    <input type="type" class="form-control" id="arcode" placeholder="รหัสลูกค้า">
+                                </div>
+                                <div class="sssearch">
+                                    <a href="#" class="btn btn-info btn-sm" data-toggle="modal" data-target="#searchar">
+                                        <span class="fa fa-search"></span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <ul class="w3-navbar" style="float: left;">
+                            <li>
+                                <br>
+                                <input type="button" class="btn btn-info" onclick="selecttype_sale();" value="ดูรายงาน">
+                            </li>
+                            <li>
+                                <div id="show_pdf"></div>
+                            </li>
+                        </ul>
+                        <br>
+                        <br>
+                        <h2> รายงานขาย</h2>
+                        <hr>
+                    </div>
+                    <div class="table-responsive" id="show_detail"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <!-- Modal -->
+    <div class="modal fade" id="detail" role="dialog" style="padding-left:0; padding-right:0;">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">รายละเอียด</h4>
+                </div>
+                <div class="modal-body" style="margin:0;padding:0;">
+                    <div style="text-align:center;">
+                        <div id="show_saledetail_head"></div>
+                        <div class="table-responsive res">
+                            <div id="show_saledetail"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <!-- Modal -->
+  <div class="modal fade" id="searchar" role="dialog" style="padding-left:0; padding-right:0;">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">ค้นหาลูกค้า</h4>
+        </div>
+        <div class="modal-body" style="margin:0;padding:0;">
+          <div class="form-group">
+            <label class="control-label col-xs-3" style="text-align:right; padding:0;" for="SaleName">ค้นหา :</label>
+            <div class="col-xs-8">
+              <input type="text" class="form-control" onkeyup="search_ar();" id="ar_search" placeholder="Search...">
+            </div>
+          </div>
+          <div style="text-align:center;" >
+              <label id="custolist"><br>** ค้นหาลูกค้า **</label>
+              <div class="table-responsive">
+              <div id="show_listar"></div>
+              
+            </div>
+          </div>
+        </div>
+
+      </div>
+      
+    </div>
+  </div>
+<!-- Modal -->
+<!-- Modal -->
+  <div class="modal fade" id="searchsale" role="dialog" style="padding-left:0; padding-right:0;">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">ค้นหาพนักงานขาย</h4>
+        </div>
+        <div class="modal-body" style="margin:0;padding:0;">
+          <div class="form-group">
+            <label class="control-label col-xs-3" style="text-align:right; padding:0;" for="SaleName">ค้นหา :</label>
+            <div class="col-xs-8">
+              <input type="text" class="form-control" onkeyup="search_sale();" id="sale_search" placeholder="Search...">
+            </div>
+          </div>
+          <div style="text-align:center;" >
+              <label id="custolist"><br>** ค้นหาพนักงานขาย **</label>
+              <div class="table-responsive">
+              <div id="show_listsale"></div>
+              
+            </div>
+          </div>
+        </div>
+
+      </div>
+      
+    </div>
+  </div>
+<!-- Modal -->
+<!-- Modal -->
+  <div class="modal fade" id="cost_insert" role="dialog" style="padding-left:0; padding-right:0;">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">กรอกข้อมูลต้นทุน</h4>
+        </div>
+        <div class="modal-body" style="margin:0;padding:0;">
+          <div class="form-group">
+            <label class="control-label col-xs-3 cost" style="text-align:right; padding:0;" for="doc_cost_insert">เลขที่ :</label>
+            <div class="col-xs-8">
+                <input type="text" readonly="readonly" class="form-control" id="doc_cost_insert" placeholder="เลขที่เอกสาร...">
+            </div>
+            <label class="control-label col-xs-3 cost" style="text-align:right; padding:0;" for="code_cost_insert">รหัสสินค้า :</label>
+            <div class="col-xs-8">
+                <input type="text" readonly="readonly" class="form-control" id="code_cost_insert" placeholder="รหัสสินค้า...">
+            </div>
+            <label class="control-label col-xs-3 cost" style="text-align:right; padding:0;" for="name_cost_insert">ชื่อสินค้า :</label>
+            <div class="col-xs-8">
+                <input type="text" readonly="readonly" class="form-control" id="name_cost_insert" placeholder="ชื่อสินค้า...">
+            </div>
+            <label class="control-label col-xs-3 cost" style="text-align:right; padding:0;" for="unit_cost_insert">หน่วยนับ :</label>
+            <div class="col-xs-8">
+                <input type="text" readonly="readonly" class="form-control" id="unit_cost_insert" placeholder="หน่วยนับ...">
+            </div>
+            <label class="control-label col-xs-3 cost" style="text-align:right; padding:0;" for="costInsert">ต้นทุน :</label>
+            <div class="col-xs-8">
+              <input type="number" class="form-control" id="costInsert" placeholder="ต้นทุน...">
+            </div>
+          </div>
+          <input type="button" class="btn btn-info" onclick="submit_cost();" value="บันทึก">
+          <br>
+        </div>
+      </div> 
+    </div>
+  </div>
+<!-- Modal -->
+    <div class="scrollToTop">
+        <a href="#" class="scrollToTop"></a>
+    </div>
+    <script type="text/javascript" src="js/jquery-1.11.3.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 100) {
+                $('.scrollToTop').fadeIn();
+            } else {
+                $('.scrollToTop').fadeOut();
+            }
+        });
+        $('.scrollToTop').click(function() {
+            $('html, body').animate({
+                scrollTop: 0
+            }, 800);
+            return false;
+        });
+
+    });
+    </script>
+    <script type="text/javascript" src="js/templete.js"></script>
+    <script type="text/javascript" src="js/function_report.js"></script>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/alertify.js"></script>
+</body>
+
+</html>
