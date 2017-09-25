@@ -1,4 +1,4 @@
-$( document ).ready(function() {
+﻿$( document ).ready(function() {
     //localStorage.clear();
     localStorage.saleCode = "";
     localStorage.SaleName = "";
@@ -62,7 +62,7 @@ function login(){
                     if(user&&pwd){
                         $.ajax({
                                 url: localStorage.link+"CMSteelWs/quotation/sale",
-                                data: '{"userid":"'+user+'","Password":"'+pwd+'"}',
+                                data: '{"userid":"'+user+'","password":"'+pwd+'"}',
                                 contentType: "application/json; charset=utf-8",
                                 dataType: "json",
                                 type: "POST",
