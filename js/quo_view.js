@@ -251,7 +251,7 @@ function perprice(price){
 		}
 
 		document.getElementById("pri").value = pp.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");		
-		document.getElementById("price").value = pp.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");		
+		document.getElementById("price").value = pp;		
 		console.log(pp);
 	
 }
@@ -277,7 +277,7 @@ function chprice(price){
 		var per = (parseInt(pri)-parseInt(price))/100;
 		pri = pri.toFixed(2);
 		document.getElementById("pri").value = pri.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-		document.getElementById("price").value = pri.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+		document.getElementById("price").value = pri;
 		document.getElementById("kr").value = per.toFixed(2);
 	}
 }
@@ -292,11 +292,11 @@ function insert_item(){
 	var qty = document.getElementById("qty").value;
 
 	if(whCode=="ไม่มีคลัง"){ whCode="";}
-	console.log('{"docNo":"'+docNo+'","itemCode":"'+itemC+'","whCode":"'+whCode+'", "shelfCode":"'+shCode+'","qty":"'+qty+'","price":"'+price+'","discountWord":"","discountAmount":"0","unitCode":"'+unit+'","isCancel":"0"}');
+	//console.log('{"docNo":"'+docNo+'","itemCode":"'+itemC+'","whCode":"'+whCode+'", "shelfCode":"'+shCode+'","qty":"'+qty+'","price":'+price+',"discountWord":"","discountAmount":"0","unitCode":"'+unit+'","isCancel":"0"}');
 
 	$.ajax({
             url: localStorage.link+"CMSteelWs/quotation/manageitem",
-            data: '{"docNo":"'+docNo+'","itemCode":"'+itemC+'","whCode":"'+whCode+'", "shelfCode":"'+shCode+'","qty":"'+qty+'","price":"'+price+'","discountWord":"","discountAmount":"0","unitCode":"'+unit+'","isCancel":"0"}',
+            data: '{"docNo":"'+docNo+'","itemCode":"'+itemC+'","whCode":"'+whCode+'", "shelfCode":"'+shCode+'","qty":"'+qty+'","price":'+price+',"discountWord":"","discountAmount":"0","unitCode":"'+unit+'","isCancel":"0"}',
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             type: "POST",

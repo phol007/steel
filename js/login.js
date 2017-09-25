@@ -62,7 +62,7 @@ function login(){
                     if(user&&pwd){
                         $.ajax({
                                 url: localStorage.link+"CMSteelWs/quotation/sale",
-                                data: '{"type":"","search":"'+user+'"}',
+                                data: '{"userid":"'+user+'","Password":"'+pwd+'"}',
                                 contentType: "application/json; charset=utf-8",
                                 dataType: "json",
                                 type: "POST",
