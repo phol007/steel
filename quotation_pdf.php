@@ -269,16 +269,24 @@ $data = json_decode($out, TRUE);
 date_default_timezone_set("Asia/Bangkok");
 
 $datetime = date("d/m/Y H:i:s");
+if($data['groupItem']==1){
+  $header = "<div style='width:50%; text-align:left; float:left;'><img src='images/nps.gif' style='width:70px;'></div>";
+  $size = 25;
+  $mar = 5;
+}else{
+  $header = "<div style='width:50%; text-align:left; float:left;'><img src='images/nps2.png' style='width:70px;'></div>";
+  $size = 27;
+  $mar = 7;
+}
 
-$header = "<div style='width:50%; text-align:left; float:left;'><img src='images/nps2.png' style='width:70px;'>&nbsp;<img src='images/nps.gif' style='width:70px;'></div>";
-$header .= "<div style='width:50%; text-align:right; float:left; padding:0;'><h1 style='padding-top:10%; padding-bottom: 0; margin: 0;'>ใบเสนอราคา/QUOTATION</h1></div>";
+$header .= "<div style='width:50%; text-align:right; float:left; padding:0;'><h1 style='padding-top:".$mar."%; padding-bottom: 0; margin: 0;'>ใบเสนอราคา/QUOTATION</h1></div>";
 
 $footer = "<div style='width:100%; text-align:right;'>บันทึก ณ วันที่ ".$datetime."</div>"; 
 
 $html = ob_get_contents();
 ob_end_clean();
 $pdf = new mPDF('th', 'A4-P', '0', 'THsarabun');
-$pdf->SetMargins(0,0,30);
+$pdf->SetMargins(0,0, $size);
 $pdf->SetHeader($header);
 $pdf->WriteHTML($html);
 $pdf->Setfooter($footer);
