@@ -100,7 +100,7 @@ $data = json_decode($out, TRUE);
     <td width="50%" style="border-right: 1px solid black; vertical-align: top;">
         <table>
           <tr>
-            <td width="40%"><b>ชื่อลูกค้า</b></td><td><?php echo $data['arCode']."&nbsp;&nbsp;".$data['arname']; ?></td>
+            <td width="40%"><b>ชื่อลูกค้า</b></td><td><?php echo $data['arname']; ?></td>
           </tr>
           <tr>
             <td width="40%"><b>ทีอยู่</b></td><td><?php 
@@ -157,11 +157,11 @@ $data = json_decode($out, TRUE);
         <tr style="background: #d9d9d9">
           
           <th style="border-right:0.5px dashed black; border-bottom:1px solid black;">ลำดับ</th>
-          <th width="40%" style="border-right:0.5px dashed black; border-bottom:1px solid black;">รหัสสินค้า/รายละเอียด</th>
+          <th width="40%" style="border-right:0.5px dashed black; border-bottom:1px solid black;">รายละเอียด</th>
           <th style="border-right:1px dashed black; border-bottom:1px solid black;">จำนวน</th>
           <th style="border-right:1px dashed black; border-bottom:1px solid black;">หน่วย</th>
           <th style="border-right:1px dashed black; border-bottom:1px solid black;">ราคาต่อหน่วย</th>
-          <th style="border-bottom:1px solid black;">ราคารวมภาษี</th>
+          <th style="border-bottom:1px solid black;">ราคารวม</th>
 
         </tr>
         <?php
@@ -171,7 +171,7 @@ $data = json_decode($out, TRUE);
          foreach($result as $val) {
                   echo "<tr>
                             <td style='border-right:0.5px dashed black; text-align:center; vertical-align: top;'>".$n."</td>
-                            <td style='border-right:0.5px dashed black;'>".$val['itemCode']." ".$val['itemName']."</td>
+                            <td style='border-right:0.5px dashed black;'>".$val['itemName']."</td>
                             <td style='border-right:0.5px dashed black; text-align:right; padding-right:1%;'>".$val['qty']."</td>
                             <td style='border-right:0.5px dashed black; text-align:right; padding-right:1%;'>".$val['unitCode']."</td>
                             <td style='border-right:0.5px dashed black; text-align:right; padding-right:1%;'>".number_format( $val['price'] , 2 )."</td>
@@ -213,11 +213,11 @@ $data = json_decode($out, TRUE);
           <td colspan="2" style="vertical-align: top;">
               <table width="100%" style="margin: 0; ">
                 <tr>
-                  <td style="text-align: right; width: 55%;">ราคาสินค้า</td>
+                  <td style="text-align: right; width: 55%;">ยอดรวม</td>
                   <td style="text-align: right;"><?php echo number_format($data['beforeTaxAmount'],2); ?></td>
                 </tr>
                 <tr>
-                  <td style="text-align: right; width: 55%;">จำนวนภาษีมูลค่าเพิ่ม</td>
+                  <td style="text-align: right; width: 55%;">ภาษีมูลค่าเพิ่ม</td>
                   <td style="text-align: right;"><?php echo number_format($data['taxAmount'],2) ?></td>
                 </tr>
                 <tr>
@@ -247,7 +247,6 @@ $data = json_decode($out, TRUE);
           <br>
           <br>
           .........../........../...........<br>
-          พนักงานขาย/ผู้เสนอ<br>ราคา
           ผู้อนุมัติการเสนอราคา
           </td>
           <td width="20%" style="text-align: center; vertical-align: top;">
@@ -270,13 +269,16 @@ $data = json_decode($out, TRUE);
 date_default_timezone_set("Asia/Bangkok");
 
 $datetime = date("d/m/Y H:i:s");
-$header = "<div style='width:100%; text-align:right;'><h1>ใบเสนอราคา/QUOTATION</h1></div>";    
+
+$header = "<div style='width:50%; text-align:left; float:left;'><img src='images/nps2.png' style='width:70px;'>&nbsp;<img src='images/nps.gif' style='width:70px;'></div>";
+$header .= "<div style='width:50%; text-align:right; float:left; padding:0;'><h1 style='padding-top:10%; padding-bottom: 0; margin: 0;'>ใบเสนอราคา/QUOTATION</h1></div>";
+
 $footer = "<div style='width:100%; text-align:right;'>บันทึก ณ วันที่ ".$datetime."</div>"; 
 
 $html = ob_get_contents();
 ob_end_clean();
 $pdf = new mPDF('th', 'A4-P', '0', 'THsarabun');
-$pdf->SetMargins(0,0,25);
+$pdf->SetMargins(0,0,30);
 $pdf->SetHeader($header);
 $pdf->WriteHTML($html);
 $pdf->Setfooter($footer);
